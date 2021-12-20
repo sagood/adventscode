@@ -57,8 +57,9 @@ def magnitude(tokens):
 
 
 def main():
-    with open('in.txt') as f:
+    with open('small.txt') as f:
         numbers = [tokenize(line.strip()) for line in f.readlines()]
+        # print(numbers)
 
         total = functools.reduce(
             lambda left, right: reduct(['['] + left + right + [']']),
