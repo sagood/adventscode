@@ -1,0 +1,23 @@
+import numpy as np
+
+
+def main():
+    colors = {'red': 0, 'green': 1, 'blue': 2}
+    with open('in.txt') as f:
+        lines = f.readlines()
+        cubes = np.zeros((len(lines), 3, 10), dtype=int)
+        for i, line in enumerate(lines):
+            _, p = line.split(':')
+            for j, c in enumerate(p.split(';')):
+                for pair in c.split(','):
+                    count, color = pair.split()
+                    cubes[i, colors[color], j] = count
+
+    valid = np.all(cubes.max(2) <= np.array([12, 13, 14]), 1)
+    res = np.sum(np.argwhere(valid) + 1)
+
+    print(res)
+
+
+if __name__ == '__main__':
+    main()
